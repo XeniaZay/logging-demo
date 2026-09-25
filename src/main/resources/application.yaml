@@ -1,25 +1,3 @@
-#task1-2
-#spring:
-#  application:
-#    name: logging-demo
-
-#task1
-#logging:
-#  level:
-#    root: INFO
-#    com.example.logging_demo: DEBUG
-
-#task2
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: loggers
-#  endpoint:
-#    loggers:
-#      enabled: true
-
-#task3
 spring:
   application:
     name: order-service
@@ -31,13 +9,32 @@ app:
 logging:
   level:
     root: INFO
-    com.example.logging_demo: DEBUG
+    com.example.logging_demo: INFO
 
 management:
   endpoints:
     web:
       exposure:
-        include: loggers,env
+        include: loggers,env,health,info,metrics,prometheus
   endpoint:
-    loggers:
+    health:
+      show-details: always
+    metrics:
       enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      service: ${spring.application.name}
+      env: ${app.env}
+      version: ${app.version}
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: ${app.version}
+    env: ${app.env}
+    description: Logging demo application with structured logs and metrics
