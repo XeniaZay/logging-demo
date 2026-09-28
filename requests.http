@@ -1,0 +1,39 @@
+### 1. Успешный capture
+POST http://localhost:8080/payments/capture
+Content-Type: application/json
+
+{
+  "paymentId": "pay_ok_001",
+  "amountMinor": 10000,
+  "currency": "RUB",
+  "cardNumber": "4111111111111111",
+  "cvv": "123",
+  "token": "tok_live_xyz",
+  "email": "user@example.com"
+}
+
+### 2. Ошибка валидации (amountMinor=0)
+POST http://localhost:8080/payments/capture
+Content-Type: application/json
+
+{
+  "paymentId": "pay_fail_001",
+  "amountMinor": 0,
+  "currency": "RUB",
+  "cardNumber": "4111111111111111",
+  "cvv": "123",
+  "token": "tok_live_xyz",
+  "email": "user@example.com"
+}
+
+### 3. Проверка health
+GET http://localhost:8080/actuator/health
+
+### 4. Проверка readiness
+GET http://localhost:8080/actuator/health/readiness
+
+### 5. Метрика ошибок
+GET http://localhost:8080/actuator/metrics/payment.capture.errors
+
+### 6. Prometheus
+GET http://localhost:8080/actuator/prometheus

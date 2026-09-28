@@ -1,0 +1,11 @@
+.gradle/
+build/
+!build/libs/
+.idea/
+*.iml
+.git/
+.gitignore
+*.md
+Dockerfile
+.dockerignore
+src/
